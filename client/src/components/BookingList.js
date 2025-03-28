@@ -7,7 +7,7 @@ const BookingList = ({ refreshTrigger }) => {
 
    // Fetches the list of bookings from the server
   const fetchBookings = async () => {
-    const res = await axios.get('${process.env.REACT_APP_API_URL}/bookings');
+    const res = await axios.get(`${process.env.REACT_APP_API_URL}/bookings`);
     setBookings(res.data);
   };
      // Run fetchBookings when component mounts or refreshTrigger changes
@@ -20,7 +20,7 @@ const BookingList = ({ refreshTrigger }) => {
     console.log(' Trying to delete ID:', id); // Debug
     try {
       // Send DELETE request to the server
-      const res = await axios.delete(`${process.env.REACT_APP_API_URL}/bookings/${id}`);
+      const res = await axios.delete(`http://localhost:5000/bookings/${id}`);
       console.log('✅', res.data);
       fetchBookings(); // Refresh after deletion
     } catch (err) {

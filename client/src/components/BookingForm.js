@@ -20,7 +20,7 @@ const BookingForm = ({ onBookingCreated }) => {
     e.preventDefault();  // Prevent page reload
     try {
       // Send POST request to backend to create a booking
-       await axios.post('http://localhost:5000/book', form);
+       await axios.post(`${process.env.REACT_APP_API_URL}/book`, form);
       alert('Booking successful!');
       onBookingCreated(); // refresh bookings
       setForm({ name: '', room: '', date: '', time: '' }); // reset form
