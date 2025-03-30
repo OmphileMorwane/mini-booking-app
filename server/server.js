@@ -12,7 +12,11 @@ const PORT = 5000;
 const DATA_FILE = path.join(__dirname, 'data.json');
 
 // Apply middleware
-app.use(cors());
+app.use(cors({
+  origin: '*',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type']
+}));
 app.use(bodyParser.json()); // Parse incoming JSON requests
 
 // Load bookings from file
@@ -70,7 +74,7 @@ app.get('/bookings', (req, res) => {
 });
 
 
-// 🗑 DELETE /bookings/:id - Delete a booking by ID
+// DELETE /bookings/:id - Delete a booking by ID
 app.delete('/bookings/:id', (req, res) => {
   const id = parseInt(req.params.id);
   bookings = loadBookings();
@@ -83,6 +87,24 @@ app.delete('/bookings/:id', (req, res) => {
   }
 
   res.status(404).json({ error: 'Booking not found' });
+});
+
+// PUT /bookings/:id - Update an existing booking
+app.put('/bookings/:id', (req, res) => {
+  const id = parseInt(req.params.id);
+  const { name, room, date, time } = req.body;
+
+  bookings = loadBookings();
+  const index = bookings.findIndex(b => b.id === id);
+
+  if (index === -1) {
+    return res.status(404).json({ error: 'Booking not found' });
+  }
+
+  bookings[index] = { ...bookings[index], name, room, date, time };
+  saveBookings(bookings);
+
+  res.json({ message: 'Booking updated successfully', booking: bookings[index] });
 });
 
 // GET / - Simple homepage to confirm server is running
