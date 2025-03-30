@@ -20,7 +20,7 @@ const BookingList = ({ refreshTrigger }) => {
     console.log(' Trying to delete ID:', id); // Debug
     try {
       // Send DELETE request to the server
-      const res = await axios.delete(`${process.env.REACT_APP_API_URL}/${id}`);
+      const res = await axios.delete(`${process.env.REACT_APP_API_URL}/bookings/${id}`);
       console.log('✅', res.data);
       fetchBookings(); // Refresh after deletion
     } catch (err) {
