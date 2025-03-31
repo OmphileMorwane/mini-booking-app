@@ -64,13 +64,11 @@ npm start
 ```
 
 ## Deployment
-- **Frontend:** Deployed on Vercel
-  - Vercel root directory must be set to `client`
-  - Environment variable `REACT_APP_API_URL` must be set to the backend's Render URL
+- **Frontend:** Deployed on Vercel 
 - **Backend:** Deployed on Render
-  - Make sure Render auto-deploys from your GitHub repo
-  - Ensure CORS is enabled
 - **Vercel deployment:**    [miniBookingApp](https://mini-booking-p40ny2ry7-omphilemorwanes-projects.vercel.app)
+
+
 ## Usage Examples
 - Visit the home page
 - Fill out the form to book a room
